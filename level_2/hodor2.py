@@ -1,12 +1,15 @@
 #!/usr/bin/python3
-"""level 0"""
+"""level 1"""
 import requests
 
 
 currentvote = 0
 passed = 0
 failed = 0
-url = "http://158.69.76.135/level0.php"
+url = "http://158.69.76.135/level2.php"
+headerwin = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 \
+(KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36")
+header = {"User-Agent": headerwin, "Referer": url}
 
 try:
     ID = int(input("Input ID number: "))
@@ -19,14 +22,19 @@ except ValueError:
     print("PLEASE: input an integer")
     exit(1)
 
-mydata = {"id": ID, "holdthedoor": "Submit"}
 response = requests.get(url)
 """
-txt = response.text.split()
-txtid = txt.index(str(ID))
+print(response.cookies)
+"""
+key = response.cookies["HoldTheDoor"]
+mydata = {'id': ID, "holdthedoor": "Submit", "key": key}
+cookie = {"HoldTheDoor": key}
+"""
+#txt = response.text.split()
+#txtid = txt.index(str(ID))
 """
 for i in range(currentvote, votes):
-    response = requests.post(url, mydata)
+    response = requests.post(url, mydata, cookies=cookie, headers=header)
     if response.status_code == 200:
             passed += 1
             print("{} Passed".format(passed), end='\r')
