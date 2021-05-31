@@ -26,10 +26,7 @@ print(response.cookies)
 key = response.cookies["HoldTheDoor"]
 mydata = {'id': ID, "holdthedoor": "Submit", "key": key}
 cookie = {"HoldTheDoor": key}
-"""
-txt = response.text.split()
-txtid = txt.index(str(ID))
-"""
+
 for i in range(currentvote, votes):
     response = requests.post(url, mydata, cookies=cookie)
     if response.status_code == 200:

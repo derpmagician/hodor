@@ -21,10 +21,7 @@ except ValueError:
 
 mydata = {"id": ID, "holdthedoor": "Submit"}
 response = requests.get(url)
-"""
-txt = response.text.split()
-txtid = txt.index(str(ID))
-"""
+
 for i in range(currentvote, votes):
     response = requests.post(url, mydata)
     if response.status_code == 200:
