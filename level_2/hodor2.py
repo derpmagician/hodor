@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""level 1"""
+"""level 2"""
 import requests
 
 
@@ -23,9 +23,7 @@ except ValueError:
     exit(1)
 
 response = requests.get(url)
-"""
-print(response.cookies)
-"""
+
 key = response.cookies["HoldTheDoor"]
 mydata = {'id': ID, "holdthedoor": "Submit", "key": key}
 cookie = {"HoldTheDoor": key}
